@@ -19,6 +19,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getLocationData() async {
     var calendarData = await CalendarModel().getCountryCalendar('FR', 2022);
+    print(calendarData);
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return FranceScreen(
