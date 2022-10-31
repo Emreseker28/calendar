@@ -6,3 +6,15 @@ const franceISO = "FR";
 const spainISO = "ES";
 
 //request: curl 'https://calendarific.com/api/v2/holidays?&api_key=API_KEY&country=&year='
+
+const kMessageTextStyle = TextStyle(
+  fontFamily: 'Spartan MB',
+  fontSize: 20.0,
+  color: Colors.white,
+);
+
+const kButtonTextStyle = TextStyle(
+  fontSize: 30.0,
+  fontFamily: 'Spartan MB',
+  color: Colors.white,
+);
