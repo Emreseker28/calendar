@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'france_screen.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:calendar/services/calendar.dart';
+import 'package:calendar/utilities/constants.dart';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -19,7 +19,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void getLocationData() async {
     var calendarData = await CalendarModel().getCountryCalendar('FR', 2022);
-    print(calendarData);
+    //print(calendarData);
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return FranceScreen(
@@ -30,13 +30,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SpinKitDoubleBounce(
-          color: Colors.white,
-          size: 100.0,
-        ),
-      ),
-    );
+    return const Scaffold(body: kLoadingSpin);
   }
 }
