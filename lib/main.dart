@@ -1,6 +1,5 @@
 import 'package:calendar/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
-import 'screens/france_screen.dart';
 
 void main() => runApp(MyApp());
 
