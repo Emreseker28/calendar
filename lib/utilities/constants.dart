@@ -26,14 +26,3 @@ const kLoadingSpin = Center(
     size: 100.0,
   ),
 );
-
-ListView kTextBuilder = ListView.builder(
-    padding: const EdgeInsets.all(8),
-    itemBuilder: (BuildContext context, int index) {
-      return ListTile(
-        trailing: Text(
-          'Holiday: ',
-          style: kMessageTextStyle,
-        ),
-      );
-    });
