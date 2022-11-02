@@ -26,3 +26,8 @@ const kLoadingSpin = Center(
     size: 100.0,
   ),
 );
+
+List<int> getList() {
+  List<int> list = <int>[2022, 2021, 2020, 2019];
+  return list;
+}
