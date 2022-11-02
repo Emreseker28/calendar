@@ -1,3 +1,4 @@
+import 'package:calendar/screens/spain_screen.dart';
 import 'package:calendar/services/calendar.dart';
 import 'package:calendar/utilities/constants.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class FranceScreen extends StatefulWidget {
 class _FranceScreenState extends State<FranceScreen> {
   CalendarModel calendar = CalendarModel();
   String holidayName = '';
+  String countryISO = 'FR';
+  int dropdownValue = 2022;
   int year = 0;
   int month = 0;
   int day = 0;
@@ -20,6 +23,7 @@ class _FranceScreenState extends State<FranceScreen> {
   var yearList = [];
   var monthList = [];
   var dayList = [];
+  var list = getList();
 
   void updateUI(dynamic calendarData) {
     setState(() {
@@ -32,7 +36,7 @@ class _FranceScreenState extends State<FranceScreen> {
       }
 
       for (int i = 0; i < 24; i++) {
-        var holiday = widget.franceCalendar['response']['holidays'][i]['name'];
+        var holiday = calendarData['response']['holidays'][i]['name'];
         var yearToAdd =
             calendarData['response']['holidays'][i]['date']['datetime']['year'];
         var monthToAdd = calendarData['response']['holidays'][i]['date']
@@ -44,10 +48,6 @@ class _FranceScreenState extends State<FranceScreen> {
         monthList.add(monthToAdd);
         dayList.add(dayToAdd);
       }
-      holidayName = holidayList[0];
-      year = yearList[0];
-      month = monthList[0];
-      day = dayList[0];
     });
   }
 
@@ -57,9 +57,41 @@ class _FranceScreenState extends State<FranceScreen> {
     updateUI(widget.franceCalendar);
   }
 
+  void updateYear(int selectedYear) async {
+    var newCalendarData =
+        await calendar.getCountryCalendar(countryISO, selectedYear);
+    setState(() {
+      updateUI(newCalendarData);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
+      Card(
+        child: DropdownButton<int>(
+          value: dropdownValue,
+          icon: const Icon(Icons.arrow_downward),
+          elevation: 16,
+          style: kMessageTextStyle,
+          underline: Container(
+            height: 2,
+            color: Colors.deepPurpleAccent,
+          ),
+          onChanged: (int? value) {
+            setState(() {
+              dropdownValue = value!;
+              updateYear(dropdownValue);
+            });
+          },
+          items: list.map<DropdownMenuItem<int>>((int value) {
+            return DropdownMenuItem(
+              value: value,
+              child: Text(value.toString()),
+            );
+          }).toList(),
+        ),
+      ),
       Column(
         children: List.generate(holidayList.length, (index) {
           return Container(
@@ -71,12 +103,22 @@ class _FranceScreenState extends State<FranceScreen> {
                 ),
                 SizedBox(
                   height: 20.0,
-                )
+                ),
               ],
             ),
           );
         }),
       ),
+      ElevatedButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return SpainScreen();
+            }));
+          },
+          child: Text(
+            'Spain',
+            style: kButtonTextStyle,
+          ))
     ]);
   }
 }
