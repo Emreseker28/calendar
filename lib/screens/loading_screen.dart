@@ -14,22 +14,25 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    getLocationData();
+    getCalendar();
   }
 
-  void getLocationData() async {
+  void getCalendar() async {
     var calendarData = await CalendarModel().getCountryCalendar('FR', 2022);
-    //print(calendarData);
+    //Because the first screen is for France, calling the getter method for France.
 
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return FranceScreen(
-        franceCalendar: calendarData,
+        franceCalendar:
+            calendarData, //Pass the obtained information to the second screen.
       );
     }));
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: kLoadingSpin);
+    return const Scaffold(
+      body: kLoadingSpin, //Show a spinning circle while loading the screen.
+    );
   }
 }

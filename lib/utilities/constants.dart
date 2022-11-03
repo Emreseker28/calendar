@@ -20,6 +20,7 @@ const kButtonTextStyle = TextStyle(
     color: Colors.white,
     decoration: TextDecoration.none);
 
+//External dependency, shows a spinning circle to user when loading the app.
 const kLoadingSpin = Center(
   child: SpinKitDoubleBounce(
     color: Colors.white,
@@ -27,6 +28,7 @@ const kLoadingSpin = Center(
   ),
 );
 
+//getList() function keeps the years in one list that is accessible to everywhere.
 List<int> getList() {
   List<int> list = <int>[2022, 2021, 2020, 2019];
   return list;

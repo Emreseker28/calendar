@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class NetworkHelper {
-  NetworkHelper(this.url);
+  NetworkHelper(this.url); //Constructor.
 
   final String url;
 
@@ -10,11 +10,13 @@ class NetworkHelper {
     http.Response response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {
+      //If there is no problem.
       String data = response.body;
 
-      return jsonDecode(data);
+      return jsonDecode(data); //Decode the information.
     } else {
-      print(response.statusCode);
+      //If a problem happened while getting information.
+      print(response.statusCode); //Print the error code.
     }
   }
 }
